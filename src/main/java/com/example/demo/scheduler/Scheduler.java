@@ -45,7 +45,7 @@ public class Scheduler {
     @Autowired
     private LineMessagingClient lineMessagingClient;
 
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 3600000)
     private void doMulticast() {
 	log.info("doMulticast");
 	if (IS_SCHEDULING_ENABLED) {
