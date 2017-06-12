@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.demo.controller.BaseEventController;
+import com.example.demo.service.MessageService;
 import com.linecorp.bot.client.LineMessagingClient;
-import com.linecorp.bot.model.Multicast;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
@@ -23,48 +23,41 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
 @LineMessageHandler
 public class Scheduler extends BaseEventController {
+
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     private static Boolean IS_SCHEDULING_ENABLED = false;
 
-    @Autowired
-    private LineMessagingClient lineMessagingClient;
+    private static final String BOT_USER_ID = "Ud23adb9abc452bac8943c4f535c8901a";
+    private static final String GROUP_USER_ID = "C5a9cb6b2ab498a10ba68899499b305e3";
 
-    @Scheduled(fixedDelay = 3600000)
-    private void doMulticast() {
-	log.info("doMulticast");
+    @Autowired
+    private MessageService messageService;
+
+    // @Scheduled(fixedDelay = 3600000)
+    @Scheduled(fixedDelay = 10000)
+    private void testScheduleMulticast() {
+	log.info("testScheduleMulticast");
 	if (IS_SCHEDULING_ENABLED) {
 	    Set<String> to = new HashSet<>();
-	    to.add("Ud23adb9abc452bac8943c4f535c8901a");
+	    to.add(BOT_USER_ID);
 
 	    List<Message> messages = new ArrayList<>();
 	    messages.add(new TextMessage("[Multicast] อุ๊ด อุ๊ด ขณะนี้เวลา " + dateFormat.format(new Date())));
 
-	    Multicast multicast = new Multicast(to, messages);
-	    try {
-		BotApiResponse response = lineMessagingClient.multicast(multicast).get();
-		System.out.println("response : " + response.getMessage() + " : " + response.getDetails().toString());
-	    } catch (Exception e) {
-		// Exception to admin
-		e.printStackTrace();
-	    }
+	    messageService.multicast(to, messages);
 	}
     }
 
     @Scheduled(cron = "0 0 * * * *")
-    private void doPush() {
+    private void testSchedulePush() {
+	log.info("testSchedulePush");
 	if (IS_SCHEDULING_ENABLED) {
-	    PushMessage pushMessage = new PushMessage("C5a9cb6b2ab498a10ba68899499b305e3",
+	    PushMessage pushMessage = new PushMessage(GROUP_USER_ID,
 		    new TextMessage("[Push] อุ๊ด อุ๊ด ขณะนี้เวลา " + dateFormat.format(new Date())));
-	    try {
-		BotApiResponse response = lineMessagingClient.pushMessage(pushMessage).get();
-		System.out.println("response : " + response.getMessage() + " : " + response.getDetails().toString());
-	    } catch (Exception e) {
-		// Exception to admin
-		e.printStackTrace();
-	    }
+	    messageService.push(pushMessage);
 	}
     }
 
