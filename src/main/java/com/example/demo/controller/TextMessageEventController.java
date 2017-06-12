@@ -80,23 +80,8 @@ public class TextMessageEventController extends BaseEventController {
 			return;
 		    }
 
-		    try {
-			this.reply(replyToken, Arrays.asList(new TextMessage(
-				"RequestContextHolder: " + RequestContextHolder.getRequestAttributes())));
-		    } catch (Exception e) {
-			this.reply(replyToken, Arrays.asList(new TextMessage("Exception: " + e.getMessage())));
-		    }
-
-		    try {
-			String imageUrl = createUri("/static/buttons");
-			this.reply(replyToken,
-				Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
-					new TextMessage("Status message: " + profile.getStatusMessage()),
-					new TextMessage("imageUrl: " + imageUrl)));
-		    } catch (Exception e) {
-			this.reply(replyToken, Arrays.asList(new TextMessage("imageUrl Exception: " + e.getMessage())));
-		    }
-
+		    this.reply(replyToken, Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
+			    new TextMessage("Status message: " + profile.getStatusMessage())));
 		});
 	    } else {
 		this.replyText(replyToken, "Bot can't use profile API without user ID");
@@ -154,7 +139,7 @@ public class TextMessageEventController extends BaseEventController {
 	    break;
 	}
 	case "buttons": {
-	    String imageUrl = createUri("https://desolate-basin-58191.herokuapp.com/static/buttons/1040.jpg");
+	    String imageUrl = createUri("/static/buttons/1040.jpg");
 	    ButtonsTemplate buttonsTemplate = new ButtonsTemplate(imageUrl, "My button sample", "Hello, my button",
 		    Arrays.asList(new URIAction("Go to line.me", "https://line.me"),
 			    new PostbackAction("Say hello1", "hello こんにちは"),
@@ -178,7 +163,8 @@ public class TextMessageEventController extends BaseEventController {
 	    break;
 	}
 	case "imagemap":
-//	    this.replyText(replyToken, "Moo1 : " + createUri("/static/rich"));
+	    // this.replyText(replyToken, "Moo1 : " +
+	    // createUri("/static/rich"));
 	    this.replyText(replyToken, "Moo1 : " + createUri("/static/buttons/1040.jpg"));
 	    this.reply(replyToken,
 		    new ImagemapMessage(createUri("/static/rich"), "This is alt text", new ImagemapBaseSize(1040, 1040),
