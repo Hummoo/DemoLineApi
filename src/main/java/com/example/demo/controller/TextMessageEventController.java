@@ -37,17 +37,23 @@ public class TextMessageEventController extends BaseEventController {
     @Autowired
     private LineMessagingClient lineMessagingClient;
 
-    @EventMapping
-    public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-	TextMessageContent message = event.getMessage();
-	try {
-	    handleTextContent(event.getReplyToken(), event, message);
-	} catch (Exception e) {
-	    log.error(e.getMessage());
-	}
+//    @EventMapping
+//    public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+//	TextMessageContent message = event.getMessage();
+//	try {
+//	    handleTextContent(event.getReplyToken(), event, message);
+//	} catch (Exception e) {
+//	    log.error(e.getMessage());
+//	}
+//
+//	return new TextMessage("Resp: " + event.getMessage().getText() + " UserId : " + event.getSource().getUserId()
+//		+ " SenderId : " + event.getSource().getSenderId() + " Time : " + event.getTimestamp().toString());
+//    }
 
-	return new TextMessage("Resp: " + event.getMessage().getText() + " UserId : " + event.getSource().getUserId()
-		+ " SenderId : " + event.getSource().getSenderId() + " Time : " + event.getTimestamp().toString());
+    @EventMapping
+    public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
+	TextMessageContent message = event.getMessage();
+	handleTextContent(event.getReplyToken(), event, message);
     }
 
     @EventMapping
