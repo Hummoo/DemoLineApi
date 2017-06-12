@@ -60,6 +60,23 @@ public class TextMessageEventController extends BaseEventController {
 
 	log.info("Got text message from {}: {}", replyToken, text);
 	switch (text) {
+	case "aaa": {
+	    String userId = event.getSource().getUserId();
+	    if (userId != null) {
+		lineMessagingClient.getProfile(userId).whenComplete((profile, throwable) -> {
+		    if (throwable != null) {
+			this.replyText(replyToken, throwable.getMessage());
+			return;
+		    }
+
+		    this.reply(replyToken, Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
+			    new TextMessage("Status message: " + profile.getStatusMessage())));
+		});
+	    } else {
+		this.replyText(replyToken, "Bot can't use profile API without user ID");
+	    }
+	    break;
+	}
 	case "profile": {
 	    String userId = event.getSource().getUserId();
 	    if (userId != null) {
