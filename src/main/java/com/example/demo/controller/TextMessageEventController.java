@@ -88,7 +88,8 @@ public class TextMessageEventController extends BaseEventController {
 			    new TextMessage("Display name: " + profile.getDisplayName()),
 			    new TextMessage("Status message: " + profile.getStatusMessage()),
 			    new TextMessage("Profile User id: " + profile.getUserId()),
-			    new TextMessage("Source User id: " + userId)
+			    new TextMessage("Source User id: " + event.getSource().getUserId()),
+			    new TextMessage("Source Sender id: " + event.getSource().getSenderId())
 			    ));
 		});
 	    } else {
