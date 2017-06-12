@@ -5,6 +5,8 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.action.MessageAction;
@@ -79,14 +81,20 @@ public class TextMessageEventController extends BaseEventController {
 		    }
 
 		    try {
-			String imageUrl = createUri("/static/buttons/1040.jpg");
+			this.reply(replyToken, Arrays.asList(new TextMessage(
+				"RequestContextHolder: " + RequestContextHolder.getRequestAttributes())));
+		    } catch (Exception e) {
+			this.reply(replyToken, Arrays.asList(new TextMessage("Exception: " + e.getMessage())));
+		    }
+
+		    try {
+			String imageUrl = createUri("/static/buttons");
 			this.reply(replyToken,
 				Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
 					new TextMessage("Status message: " + profile.getStatusMessage()),
 					new TextMessage("imageUrl: " + imageUrl)));
 		    } catch (Exception e) {
-			this.reply(replyToken,
-				Arrays.asList(new TextMessage("Exception: " + e.getMessage())));
+			this.reply(replyToken, Arrays.asList(new TextMessage("imageUrl Exception: " + e.getMessage())));
 		    }
 
 		});
@@ -186,5 +194,9 @@ public class TextMessageEventController extends BaseEventController {
 	    this.replyText(replyToken, text);
 	    break;
 	}
+    }
+
+    protected static String createUri(String path) {
+	return ServletUriComponentsBuilder.fromCurrentContextPath().path(path).build().toUriString();
     }
 }
