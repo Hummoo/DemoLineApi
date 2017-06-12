@@ -74,9 +74,14 @@ public class TextMessageEventController extends BaseEventController {
 			this.replyText(replyToken, throwable.getMessage());
 			return;
 		    }
+		    
+		    String imageUrl = createUri("/static/buttons/1040.jpg");
+			System.out.println(imageUrl);
 
-		    this.reply(replyToken, Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
-			    new TextMessage("Status message: " + profile.getStatusMessage())));
+		    this.reply(replyToken, Arrays.asList(
+			    new TextMessage("Display name: " + profile.getDisplayName()),
+			    new TextMessage("Status message: " + profile.getStatusMessage()),
+			    new TextMessage("imageUrl: " + imageUrl)));
 		});
 	    } else {
 		this.replyText(replyToken, "Bot can't use profile API without user ID");

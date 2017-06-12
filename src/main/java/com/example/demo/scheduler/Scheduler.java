@@ -1,30 +1,18 @@
 package com.example.demo.scheduler;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
+import com.example.demo.controller.BaseEventController;
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.Multicast;
 import com.linecorp.bot.model.PushMessage;
@@ -33,14 +21,13 @@ import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
-@Component
 @LineMessageHandler
-public class Scheduler {
+public class Scheduler extends BaseEventController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    private static Boolean IS_SCHEDULING_ENABLED = true;
+    private static Boolean IS_SCHEDULING_ENABLED = false;
 
     @Autowired
     private LineMessagingClient lineMessagingClient;
@@ -66,7 +53,7 @@ public class Scheduler {
 	}
     }
 
-    @Scheduled(cron="0 0 * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     private void doPush() {
 	if (IS_SCHEDULING_ENABLED) {
 	    PushMessage pushMessage = new PushMessage("C5a9cb6b2ab498a10ba68899499b305e3",
