@@ -1,0 +1,21 @@
+{
+	"to": [
+		"Ud23adb9abc452bac8943c4f535c8901a"
+	],
+	"messages": [
+		{
+			"type": "text",
+			"text": "Moo1"
+		}
+	]
+}{
+	"to": [
+		"C5a9cb6b2ab498a10ba68899499b305e3"
+	],
+	"messages": [
+		{
+			"type": "text",
+			"text": "[Multicast] อุ๊ด อุ๊ด ขณะนี้เวลา 14:29:59"
+		}
+	]
+}
