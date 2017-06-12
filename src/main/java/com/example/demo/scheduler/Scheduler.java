@@ -69,7 +69,7 @@ public class Scheduler {
 
     }
 
-    @Scheduled(fixedDelay = 10000)
+    // @Scheduled(fixedDelay = 10000)
     private void pushToGroup() throws Exception {
 
 	String USER_AGENT = "Mozilla/5.0";
@@ -89,7 +89,8 @@ public class Scheduler {
 	// \"text\",\"text\": \"สวัสดี, หมู\"},{\"type\": \"text\",\"text\":
 	// \"Hello, world2\"}]}";
 	Scheduler x = new Scheduler();
-	String message = x.getFile("data2.json").replaceAll("Moo1", "อุ๊ด อุ๊ด ขณะนี้เวลา " + dateFormat.format(new Date()));
+	String message = x.getFile("data2.json").replaceAll("Moo1",
+		"อุ๊ด อุ๊ด ขณะนี้เวลา " + dateFormat.format(new Date()));
 
 	StringEntity entity = new StringEntity(message, ContentType.create("text/plain", "UTF-8"));
 
