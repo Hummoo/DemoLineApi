@@ -35,7 +35,7 @@ public class MessageService {
 	} catch (Exception e) {
 	    String errorMessage = "Error: " + e.getMessage() + "\n" + "To: " + to.toString() + "\n" + "Messages: "
 		    + messages.toString();
-	    escalateError(errorMessage);
+	    escalate(errorMessage);
 	}
 	return null;
     }
@@ -49,18 +49,18 @@ public class MessageService {
 	} catch (Exception e) {
 	    String errorMessage = "Error: " + e.getMessage() + "\n" + "To: " + pushMessage.getTo() + "\n" + "Messages: "
 		    + pushMessage.getMessages().toString();
-	    escalateError(errorMessage);
+	    escalate(errorMessage);
 	}
 	return null;
     }
 
-    private void escalateError(String errorMessage) {
-	log.info("escalateError");
+    public void escalate(String message) {
+	log.info("escalate");
 
 	List<Message> messages = new ArrayList<>();
-	messages.add(new TextMessage(errorMessage));
+	messages.add(new TextMessage(message));
 
-	PushMessage pushMessage = new PushMessage(ADMIN_USER_ID, new TextMessage(errorMessage));
+	PushMessage pushMessage = new PushMessage(ADMIN_USER_ID, new TextMessage(message));
 	try {
 	    BotApiResponse response = lineMessagingClient.pushMessage(pushMessage).get();
 	} catch (Exception e) {

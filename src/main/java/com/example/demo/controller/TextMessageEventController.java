@@ -5,7 +5,6 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.linecorp.bot.client.LineMessagingClient;
@@ -155,9 +154,6 @@ public class TextMessageEventController extends BaseEventController {
 	    break;
 	}
 	case "imagemap":
-	    // this.replyText(replyToken, "Moo1 : " +
-	    // createUri("/static/rich"));
-	    this.replyText(replyToken, "Moo1 : " + createUri("/static/buttons/1040.jpg"));
 	    this.reply(replyToken,
 		    new ImagemapMessage(createUri("/static/rich"), "This is alt text", new ImagemapBaseSize(1040, 1040),
 			    Arrays.asList(
