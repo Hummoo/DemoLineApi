@@ -37,18 +37,21 @@ public class TextMessageEventController extends BaseEventController {
     @Autowired
     private LineMessagingClient lineMessagingClient;
 
-//    @EventMapping
-//    public TextMessage handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
-//	TextMessageContent message = event.getMessage();
-//	try {
-//	    handleTextContent(event.getReplyToken(), event, message);
-//	} catch (Exception e) {
-//	    log.error(e.getMessage());
-//	}
-//
-//	return new TextMessage("Resp: " + event.getMessage().getText() + " UserId : " + event.getSource().getUserId()
-//		+ " SenderId : " + event.getSource().getSenderId() + " Time : " + event.getTimestamp().toString());
-//    }
+    // @EventMapping
+    // public TextMessage
+    // handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+    // TextMessageContent message = event.getMessage();
+    // try {
+    // handleTextContent(event.getReplyToken(), event, message);
+    // } catch (Exception e) {
+    // log.error(e.getMessage());
+    // }
+    //
+    // return new TextMessage("Resp: " + event.getMessage().getText() + " UserId
+    // : " + event.getSource().getUserId()
+    // + " SenderId : " + event.getSource().getSenderId() + " Time : " +
+    // event.getTimestamp().toString());
+    // }
 
     @EventMapping
     public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
@@ -74,14 +77,18 @@ public class TextMessageEventController extends BaseEventController {
 			this.replyText(replyToken, throwable.getMessage());
 			return;
 		    }
-		    
-		    String imageUrl = createUri("/static/buttons/1040.jpg");
-			System.out.println(imageUrl);
 
-		    this.reply(replyToken, Arrays.asList(
-			    new TextMessage("Display name: " + profile.getDisplayName()),
-			    new TextMessage("Status message: " + profile.getStatusMessage()),
-			    new TextMessage("imageUrl: " + imageUrl)));
+		    try {
+			String imageUrl = createUri("/static/buttons/1040.jpg");
+			this.reply(replyToken,
+				Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
+					new TextMessage("Status message: " + profile.getStatusMessage()),
+					new TextMessage("imageUrl: " + imageUrl)));
+		    } catch (Exception e) {
+			this.reply(replyToken,
+				Arrays.asList(new TextMessage("Exception: " + e.getMessage())));
+		    }
+
 		});
 	    } else {
 		this.replyText(replyToken, "Bot can't use profile API without user ID");
