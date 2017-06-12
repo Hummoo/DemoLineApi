@@ -146,7 +146,7 @@ public class TextMessageEventController extends BaseEventController {
 	    break;
 	}
 	case "buttons": {
-	    String imageUrl = createUri("/static/buttons/1040.jpg");
+	    String imageUrl = createUri("https://desolate-basin-58191.herokuapp.com/static/buttons/1040.jpg");
 	    ButtonsTemplate buttonsTemplate = new ButtonsTemplate(imageUrl, "My button sample", "Hello, my button",
 		    Arrays.asList(new URIAction("Go to line.me", "https://line.me"),
 			    new PostbackAction("Say hello1", "hello こんにちは"),
