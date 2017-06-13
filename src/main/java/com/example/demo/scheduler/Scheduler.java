@@ -14,11 +14,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.demo.controller.BaseEventController;
 import com.example.demo.service.MessageService;
-import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.message.Message;
 import com.linecorp.bot.model.message.TextMessage;
-import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 
 @LineMessageHandler
