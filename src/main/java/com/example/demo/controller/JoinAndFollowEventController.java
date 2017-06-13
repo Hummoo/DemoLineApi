@@ -44,18 +44,17 @@ public class JoinAndFollowEventController extends BaseEventController {
     @EventMapping
     public void handleJoinEvent(JoinEvent event) {
 	String replyToken = event.getReplyToken();
-	
-	String imageUrl = createUri("/static/buttons/1040.jpg");
-	    ButtonsTemplate buttonsTemplate = new ButtonsTemplate(imageUrl, "My button sample", "Hello, my button",
-		    Arrays.asList(new URIAction("Register Line Group", "https://thawing-escarpment-39910.herokuapp.com/"),
-			    new PostbackAction("Say hello1", "hello こんにちは"),
-			    new PostbackAction("言 hello2", "hello こんにちは", "hello こんにちは"),
-			    new MessageAction("Say message", "Rice=米")));
-	    TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
-	    this.reply(replyToken, templateMessage);
-	
+
+	String registerSite = "https://thawing-escarpment-39910.herokuapp.com/lineGroup/register/"
+		+ event.getSource().getSenderId();
+
+	ButtonsTemplate buttonsTemplate = new ButtonsTemplate(null, "AZCP Admin Menu", "Description",
+		Arrays.asList(new URIAction("Register Line Group", registerSite)));
+	TemplateMessage templateMessage = new TemplateMessage("Button alt text", buttonsTemplate);
+	this.reply(replyToken, templateMessage);
+
 	escalateJoinMessage(event);
-	
+
 	this.replyText(replyToken, "Joined " + event.getSource());
     }
     
