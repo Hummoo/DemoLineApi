@@ -1,4 +1,4 @@
-package com.test.moo.controller;
+package com.example.demo.carinspection;
 
 public class SendCarInspectReqDto {
 	private String transactionId;

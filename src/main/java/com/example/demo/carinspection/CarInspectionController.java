@@ -1,4 +1,4 @@
-package com.test.moo.controller;
+package com.example.demo.carinspection;
 
 import java.util.ArrayList;
 import java.util.HashSet;
