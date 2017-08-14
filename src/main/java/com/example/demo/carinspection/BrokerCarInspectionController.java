@@ -42,7 +42,7 @@ public class BrokerCarInspectionController {
 		SendCarInspectRespDto result = new SendCarInspectRespDto();
 		result.setTransactionId(request.getTransactionId());
 		result.setResponseCode("000");
-		result.setResponseDesc("Moo");
+		result.setResponseDesc("Success");
 		return result;
 	}
 
