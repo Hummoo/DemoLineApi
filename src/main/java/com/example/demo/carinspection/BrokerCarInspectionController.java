@@ -22,7 +22,7 @@ import com.linecorp.bot.model.message.TextMessage;
 
 @RestController
 @RequestMapping("/carinspection/")
-public class CarInspectionController {
+public class BrokerCarInspectionController {
 	private static final String BOT_USER_ID = "Ud23adb9abc452bac8943c4f535c8901a";
 	private static final String GROUP_USER_ID = "C5a9cb6b2ab498a10ba68899499b305e3";
 
@@ -39,13 +39,26 @@ public class CarInspectionController {
 
 		messageService.multicast(to, messages);
 
-		PushMessage pushMessage = new PushMessage(GROUP_USER_ID, new TextMessage("[Push] receiveCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
-		messageService.push(pushMessage);
-
 		SendCarInspectRespDto result = new SendCarInspectRespDto();
 		result.setTransactionId(request.getTransactionId());
 		result.setResponseCode("000");
 		result.setResponseDesc("Moo");
+		return result;
+	}
+
+	@RequestMapping(value = "receiveSrikrung", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public CarInspectionToSrikrungRespDto receiveSrikrungCarInspectionResult(@Valid @RequestBody CarInspectionToSrikrungReqDto request) throws Exception {
+		Set<String> to = new HashSet<>();
+		to.add(BOT_USER_ID);
+
+		List<Message> messages = new ArrayList<>();
+		messages.add(new TextMessage("[Multicast] receiveSrikrungCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
+
+		messageService.multicast(to, messages);
+
+		CarInspectionToSrikrungRespDto result = new CarInspectionToSrikrungRespDto();
+		result.setSaveStatus("SUCCESS");
+		result.setResSaveRemark(null);
 		return result;
 	}
 }
