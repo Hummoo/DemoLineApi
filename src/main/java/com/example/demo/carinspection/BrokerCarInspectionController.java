@@ -36,8 +36,10 @@ public class BrokerCarInspectionController {
 
 		List<Message> messages = new ArrayList<>();
 		messages.add(new TextMessage("[Multicast] receiveCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
-
 		messageService.multicast(to, messages);
+		
+		PushMessage pushMessage = new PushMessage(GROUP_USER_ID, new TextMessage("[Push] receiveCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
+		messageService.push(pushMessage);
 
 		SendCarInspectRespDto result = new SendCarInspectRespDto();
 		result.setTransactionId(request.getTransactionId());
@@ -53,8 +55,10 @@ public class BrokerCarInspectionController {
 
 		List<Message> messages = new ArrayList<>();
 		messages.add(new TextMessage("[Multicast] receiveSrikrungCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
-
 		messageService.multicast(to, messages);
+		
+		PushMessage pushMessage = new PushMessage(GROUP_USER_ID, new TextMessage("[Push] receiveSrikrungCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
+		messageService.push(pushMessage);
 
 		CarInspectionToSrikrungRespDto result = new CarInspectionToSrikrungRespDto();
 		result.setSaveStatus("SUCCESS");
