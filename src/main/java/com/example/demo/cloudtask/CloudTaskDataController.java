@@ -30,7 +30,7 @@ public class CloudTaskDataController {
 	@Autowired
 	private MessageService messageService;
 
-	@RequestMapping(value = "/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<DataDto> generateSampleData() {
 		int loop = Integer.parseInt(RandomStringUtils.randomNumeric(1));
 
