@@ -33,7 +33,6 @@ public class BrokerCarInspectionController {
 	public SendCarInspectRespDto receiveCarInspectionResult(@Valid @RequestBody SendCarInspectReqDto request) throws Exception {
 		Set<String> to = new HashSet<>();
 		to.add(BOT_USER_ID);
-
 		List<Message> messages = new ArrayList<>();
 		messages.add(new TextMessage("[Multicast] receiveCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
 		messageService.multicast(to, messages);
@@ -52,7 +51,6 @@ public class BrokerCarInspectionController {
 	public CarInspectionToSrikrungRespDto receiveSrikrungCarInspectionResult(@Valid @RequestBody CarInspectionToSrikrungReqDto request) throws Exception {
 		Set<String> to = new HashSet<>();
 		to.add(BOT_USER_ID);
-
 		List<Message> messages = new ArrayList<>();
 		messages.add(new TextMessage("[Multicast] receiveSrikrungCarInspectionResult : " + new ObjectMapper().writeValueAsString(request)));
 		messageService.multicast(to, messages);
