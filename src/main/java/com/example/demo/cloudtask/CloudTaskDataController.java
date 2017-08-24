@@ -43,6 +43,7 @@ public class CloudTaskDataController {
 			DataDto data = new DataDto();
 			data.setName(RandomStringUtils.randomAlphabetic(2));
 			data.setValue(RandomStringUtils.randomNumeric(2));
+			dataList.add(data);
 		}
 
 		return dataList;
