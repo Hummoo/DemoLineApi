@@ -1,42 +1,60 @@
 package com.example.demo.carinspection;
 
 public class SendCarInspectReqDto {
-	private String transactionId;
-	private String inspectionResult;
-	private String inspectionReason;
-	private String policyNo;
+	private String username;
+	private String password;
+	private String contractNumber;
+	private String inspectionStatus;
+	private String remark;
+	private String policyNumber;
 	private String urlPrint;
 
-	public String getTransactionId() {
-		return transactionId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getInspectionResult() {
-		return inspectionResult;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setInspectionResult(String inspectionResult) {
-		this.inspectionResult = inspectionResult;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getInspectionReason() {
-		return inspectionReason;
+	public String getContractNumber() {
+		return contractNumber;
 	}
 
-	public void setInspectionReason(String inspectionReason) {
-		this.inspectionReason = inspectionReason;
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
 	}
 
-	public String getPolicyNo() {
-		return policyNo;
+	public String getInspectionStatus() {
+		return inspectionStatus;
 	}
 
-	public void setPolicyNo(String policyNo) {
-		this.policyNo = policyNo;
+	public void setInspectionStatus(String inspectionStatus) {
+		this.inspectionStatus = inspectionStatus;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getPolicyNumber() {
+		return policyNumber;
+	}
+
+	public void setPolicyNumber(String policyNumber) {
+		this.policyNumber = policyNumber;
 	}
 
 	public String getUrlPrint() {
@@ -46,4 +64,5 @@ public class SendCarInspectReqDto {
 	public void setUrlPrint(String urlPrint) {
 		this.urlPrint = urlPrint;
 	}
+
 }

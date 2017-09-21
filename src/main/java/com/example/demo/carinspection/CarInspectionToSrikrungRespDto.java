@@ -6,7 +6,7 @@ public class CarInspectionToSrikrungRespDto {
 	private String saveStatus;
 	private String resSaveRemark;
 
-	@JsonProperty("SaveStatus")
+	@JsonProperty("Status")
 	public String getSaveStatus() {
 		return saveStatus;
 	}
@@ -15,7 +15,7 @@ public class CarInspectionToSrikrungRespDto {
 		this.saveStatus = saveStatus;
 	}
 
-	@JsonProperty("ResSaveRemark")
+	@JsonProperty("Remark")
 	public String getResSaveRemark() {
 		return resSaveRemark;
 	}

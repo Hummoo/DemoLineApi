@@ -12,42 +12,42 @@ public class CarInspectionToSrikrungReqDto {
 	private String policyNumber;
 	private String urlPrint;
 
-	@JsonProperty("Username")
+	@JsonProperty("username")
 	public String getUsername() {
 		return username;
 	}
 
-	@JsonProperty("Password")
+	@JsonProperty("password")
 	public String getPassword() {
 		return password;
 	}
 
-	@JsonProperty("ContractNumber")
+	@JsonProperty("contractnumber")
 	public String getContractNumber() {
 		return contractNumber;
 	}
 
-	@JsonProperty("InspectStatus")
+	@JsonProperty("inspectstatus")
 	public String getInspectStatus() {
 		return inspectStatus;
 	}
 
-	@JsonProperty("Remark")
+	@JsonProperty("remark")
 	public String getRemark() {
 		return remark;
 	}
 
-	@JsonProperty("Create_User")
+	@JsonProperty("create_user")
 	public String getCreateUser() {
 		return createUser;
 	}
 
-	@JsonProperty("PolicyNumber")
+	@JsonProperty("policynumber")
 	public String getPolicyNumber() {
 		return policyNumber;
 	}
 
-	@JsonProperty("URLPrint")
+	@JsonProperty("urlprint")
 	public String getUrlPrint() {
 		return urlPrint;
 	}

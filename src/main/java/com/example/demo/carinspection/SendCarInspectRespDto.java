@@ -1,31 +1,23 @@
 package com.example.demo.carinspection;
 
 public class SendCarInspectRespDto {
-	private String transactionId;
-	private String responseCode;
-	private String responseDesc;
+	private String saveStatus;
+	private String resSaveRemark;
 
-	public String getTransactionId() {
-		return transactionId;
+	public String getSaveStatus() {
+		return saveStatus;
 	}
 
-	public void setTransactionId(String transactionId) {
-		this.transactionId = transactionId;
+	public void setSaveStatus(String saveStatus) {
+		this.saveStatus = saveStatus;
 	}
 
-	public String getResponseCode() {
-		return responseCode;
+	public String getResSaveRemark() {
+		return resSaveRemark;
 	}
 
-	public void setResponseCode(String responseCode) {
-		this.responseCode = responseCode;
+	public void setResSaveRemark(String resSaveRemark) {
+		this.resSaveRemark = resSaveRemark;
 	}
 
-	public String getResponseDesc() {
-		return responseDesc;
-	}
-
-	public void setResponseDesc(String responseDesc) {
-		this.responseDesc = responseDesc;
-	}
 }
